@@ -1,6 +1,5 @@
 package com.pattern.prototype;
 
-import javax.sql.rowset.serial.SerialStruct;
 import java.io.*;
 
 /**
@@ -9,9 +8,9 @@ import java.io.*;
  * Time: 15:04
  */
 public class PrototypeTest implements Cloneable, Serializable{
-    private long serializeID = 1L;
+    private static final long serializeID = 1L;
     private String str;
-    private SerialStruct obj;
+    private SerializableObject obj;
 
     //浅拷贝
     public Object clone() throws CloneNotSupportedException {
@@ -29,7 +28,10 @@ public class PrototypeTest implements Cloneable, Serializable{
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         ObjectInputStream ois = new ObjectInputStream(bais);
         return ois.readObject();
-
     }
 
+}
+
+class SerializableObject implements Serializable {
+    private static final long serializeID = 1L;
 }
